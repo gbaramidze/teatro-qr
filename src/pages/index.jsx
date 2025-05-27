@@ -1,13 +1,13 @@
 import React from 'react';
-import Logo from './components/Logo';
-import LanguageSelector from './components/LanguageSelector';
-import SearchBar from './components/SearchBar';
-import Cart from './components/Cart';
-import SectionSelector from './components/SectionSelector';
-import CategoryNav from './components/CategoryNav';
-import MenuSection from './components/MenuSection';
-import { mockData} from './data/mockData';
-import { translations } from './data/translations';
+import Logo from '../components/Logo';
+import LanguageSelector from '../components/LanguageSelector';
+import SearchBar from '../components/SearchBar';
+import Cart from '../components/Cart';
+import SectionSelector from '../components/SectionSelector';
+import CategoryNav from '../components/CategoryNav';
+import MenuSection from '../components/MenuSection';
+import { mockData} from '../data/mockData';
+import { translations } from '../data/translations';
 
 function App() {
   const [section, setSection] = React.useState(null);
