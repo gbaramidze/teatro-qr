@@ -199,7 +199,7 @@ export default function MenuPage() {
           <div
             ref={navRef}
             onScroll={handleNavScroll}
-            className="flex overflow-x-auto space-x-4 py-3 scrollbar-hide relative"
+            className="flex overflow-x-auto space-x-4 py-3 scrollbar-hide relative hideScrollbar"
           >
             {/* Left shadow for scroll indication */}
             {navScrollLeft > 0 && (
@@ -225,7 +225,7 @@ export default function MenuPage() {
     transition-colors  
     ${activeCategory === category.id
                   ? "border-b-yellow-600 text-yellow-500 border-b-2"
-                  : "border-b-stone-600 text-white hover:bg-yellow-700 hover:bg-opacity-30"
+                  : "border-b-stone-600 text-white"
                 }
   `}
               >
@@ -256,7 +256,7 @@ export default function MenuPage() {
                 {category.name}
               </h2>
 
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                 {category.items.map(item => {
                   const price = item.itemSizes[0]?.prices[0]?.price || 0;
                   const image = item.itemSizes[0]?.buttonImage?.['254x196x100.webp'] ||
@@ -269,7 +269,7 @@ export default function MenuPage() {
                       className="bg-stone-900 flex flex-col justify-between rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-stone-700 cursor-pointer shadow-stone-900 "
 
                     >
-                      <div className="relative h-48" onClick={() => openItemModal(item)}>
+                      <div className="relative h-62" onClick={() => openItemModal(item)}>
                         <img
                           src={image}
                           alt={item.name}
@@ -288,7 +288,7 @@ export default function MenuPage() {
                           onClick={() => {
                             addToCart(item, quantity);
                           }}
-                          className="mt-2 w-full bg-yellow-600 shadow-md shadow-stone-800 hover:bg-yellow-700 text-white py-1 px-4 rounded-3xl transition-colors">
+                          className="mt-2 w-full bg-yellow-600 shadow-md shadow-stone-800 text-white py-1 px-4 rounded-3xl transition-colors">
                           {inCart ? `${inCart} x - ` : ''} {price} ₾
                         </button>
                       </div>
@@ -300,7 +300,7 @@ export default function MenuPage() {
           ))
         ) : (
           <div className="text-center py-12">
-            <p className="text-xl text-stone-400">No items found matching your search.</p>
+            <p className="text-xl text-stone-400">Loading...</p>
           </div>
         )}
       </main>
@@ -312,7 +312,7 @@ export default function MenuPage() {
         >
           <button
             onClick={() => setShowCart(true)}
-            className="bg-yellow-600 hover:bg-yellow-700 text-white py-3 px-6 rounded-full shadow-lg font-bold flex items-center"
+            className="bg-yellow-600 text-white py-3 px-6 rounded-full shadow-lg font-bold flex items-center"
           >
             <FiShoppingCart className="mr-2"/>
             {totalPrice.toFixed(2)} ₾
@@ -323,11 +323,11 @@ export default function MenuPage() {
       {/* Item Detail Modal */}
       {selectedItem && (
         <div className="fixed inset-0 z-30 bg-black bg-opacity-75 flex items-center justify-center p-4">
-          <div className="bg-stone-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-stone-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto hideScrollbar">
             <div className="relative">
               <button
                 onClick={closeItemModal}
-                className="absolute top-4 right-4 z-10 bg-stone-900 rounded-full p-2 text-white hover:bg-stone-700"
+                className="absolute top-4 right-4 z-10 bg-stone-900 rounded-full p-2 text-white "
               >
                 <FiX size={24}/>
               </button>
@@ -357,7 +357,7 @@ export default function MenuPage() {
                   <div className="flex items-center mb-6">
                     <button
                       onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                      className="bg-stone-700 hover:bg-stone-600 text-white p-2 rounded-l-lg"
+                      className="bg-stone-700 text-white p-2 rounded-l-lg"
                     >
                       <FiMinus/>
                     </button>
@@ -366,7 +366,7 @@ export default function MenuPage() {
                     </span>
                     <button
                       onClick={() => setQuantity(prev => prev + 1)}
-                      className="bg-stone-700 hover:bg-stone-600 text-white p-2 rounded-r-lg"
+                      className="bg-stone-700 text-white p-2 rounded-r-lg"
                     >
                       <FiPlus/>
                     </button>
