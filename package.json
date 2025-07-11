@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/cssinjs": "^1.23.0",
     "@heroicons/react": "^2.2.0",
+    "@plaiceholder/next": "^3.0.0",
     "@tailwindcss/postcss": "^4.1.7",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

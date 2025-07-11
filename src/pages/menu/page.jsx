@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
 import {FiMinus, FiPlus, FiShoppingCart, FiX} from 'react-icons/fi';
 import Logo from "../../components/Logo";
+import Image from "next/image";
 
 export default function MenuPage() {
   const [categories, setCategories] = useState([]);
@@ -270,11 +271,14 @@ export default function MenuPage() {
 
                     >
                       <div className="relative h-62" onClick={() => openItemModal(item)}>
-                        <img
+                        <Image
+                          fill
                           src={image}
                           alt={item.name}
                           className="w-full h-full object-cover"
                           loading="lazy"
+                          placeholder={"blur"}
+                          blurDataURL={`/_next/image?url=${image}&w=16&q=30`}
                         />
                         <div
                           className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
@@ -334,10 +338,17 @@ export default function MenuPage() {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="h-64 lg:h-full">
-                  <img
+                  <Image
+                    width={600}
+                    height={768}
+                    loading={"eager"}
+                    placeholder={"blur"}
                     src={selectedItem.itemSizes[0]?.buttonImage?.['508x392x100.webp'] ||
                       selectedItem.itemSizes[0]?.buttonImage?.src ||
                       'https://placehold.co/600x400/333333/FFF/?text=no%20image'}
+                    blurDataURL={`/_next/image?url=${selectedItem.itemSizes[0]?.buttonImage?.['508x392x100.webp'] ||
+                    selectedItem.itemSizes[0]?.buttonImage?.src ||
+                    'https://placehold.co/600x400/333333/FFF/?text=no%20image'}&w=16&q=1`}
                     alt={selectedItem.name}
                     className="w-full h-full object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none"
                   />
@@ -415,7 +426,9 @@ export default function MenuPage() {
                          className="flex justify-between items-center py-3 border-b border-stone-700">
                       <div className="flex-1">
                         <p className="text-yellow-400 font-medium">
-                          <img
+                          <Image
+                            width={96}
+                            height={96}
                             src={item.itemSizes[0]?.buttonImage?.['44x44x100.webp'] ||
                               item.itemSizes[0]?.buttonImage?.src ||
                               'https://placehold.co/600x400/333333/FFF/?text=no%20image'}
