@@ -243,7 +243,7 @@ export default function MenuPage() {
       </nav>
 
       {/* Menu Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-2 py-8">
         {filteredCategories.length > 0 ? (
           filteredCategories.map(category => (
             <section
@@ -261,12 +261,12 @@ export default function MenuPage() {
                   const price = item.itemSizes[0]?.prices[0]?.price || 0;
                   const image = item.itemSizes[0]?.buttonImage?.['254x196x100.webp'] ||
                     item.itemSizes[0]?.buttonImage?.src ||
-                    '/placeholder-food.jpg';
+                    'https://placehold.co/600x400/333333/FFF/?text=no%20image';
                   const inCart = cart.find(s => s.itemId === item.itemId)?.quantity
                   return (
                     <div
                       key={item.itemId}
-                      className="bg-stone-900 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-stone-700 cursor-pointer shadow-stone-900 "
+                      className="bg-stone-900 flex flex-col justify-between rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-stone-700 cursor-pointer shadow-stone-900 "
 
                     >
                       <div className="relative h-48" onClick={() => openItemModal(item)}>
@@ -278,17 +278,17 @@ export default function MenuPage() {
                         />
                         <div
                           className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                          <h3 className="text-xl font-bold line-clamp-2">{item.name}</h3>
-                          <p className="text-yellow-400">{price} ₾</p>
+                          <h3
+                            className="text-lg font-bold line-clamp-2">{item.name}</h3>
                         </div>
                       </div>
-                      <div className="p-4">
+                      <div className="p-2">
                         <p className="text-stone-300 line-clamp-2">{item.description}</p>
                         <button
                           onClick={() => {
                             addToCart(item, quantity);
                           }}
-                          className="mt-4 w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-lg transition-colors">
+                          className="mt-2 w-full bg-yellow-600 shadow-md shadow-stone-800 hover:bg-yellow-700 text-white py-1 px-4 rounded-3xl transition-colors">
                           {inCart ? `${inCart} x - ` : ''} {price} ₾
                         </button>
                       </div>
@@ -337,7 +337,7 @@ export default function MenuPage() {
                   <img
                     src={selectedItem.itemSizes[0]?.buttonImage?.['508x392x100.webp'] ||
                       selectedItem.itemSizes[0]?.buttonImage?.src ||
-                      '/placeholder-food.jpg'}
+                      'https://placehold.co/600x400/333333/FFF/?text=no%20image'}
                     alt={selectedItem.name}
                     className="w-full h-full object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none"
                   />
@@ -418,7 +418,7 @@ export default function MenuPage() {
                           <img
                             src={item.itemSizes[0]?.buttonImage?.['44x44x100.webp'] ||
                               item.itemSizes[0]?.buttonImage?.src ||
-                              '/placeholder-food.jpg'}
+                              'https://placehold.co/600x400/333333/FFF/?text=no%20image'}
                             alt={item.name}
                             className="inline-block w-8 h-8 mr-2 rounded"/>
                           {item.name}</p>
