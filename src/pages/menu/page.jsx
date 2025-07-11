@@ -182,16 +182,19 @@ export default function MenuPage() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-gray-800 text-gray-100 relative pb-16">
+    <div className="min-h-screen bg-stone-800 text-stone-100 relative pb-16">
       <Head>
         <title>Teatro Nightclub Menu</title>
         <meta name="description" content="Explore our exquisite nightclub menu"/>
       </Head>
 
       {/* Sticky Navigation */}
-      <nav className="sticky top-0 z-20 bg-gray-800 shadow-lg border-b border-gray-600">
+      <div className={"bg-stone-900 p-2"}>
+        <Logo/>
+      </div>
+
+      <nav className="sticky top-0 z-20 bg-stone-900 shadow-lg border-b border-stone-600 shadow-black">
         <div className="container mx-auto px-4">
-          <Logo/>
 
           <div
             ref={navRef}
@@ -201,25 +204,38 @@ export default function MenuPage() {
             {/* Left shadow for scroll indication */}
             {navScrollLeft > 0 && (
               <div
-                className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-gray-800 to-transparent z-10 pointer-events-none"/>
+                className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-stone-800 to-transparent z-10 pointer-events-none"/>
             )}
 
             {/* Right shadow for scroll indication */}
             <div
-              className="absolute right-0 top-0 bottom-0 w-8  from-gray-800 to-transparent z-10 pointer-events-none"/>
+              className="absolute right-0 top-0 bottom-0 w-8  from-stone-800 to-transparent z-10 pointer-events-none"/>
 
             {categories.map(category => (
               <button
                 key={category.id}
                 data-category-id={category.id}
                 onClick={() => scrollToCategory(category.id)}
-                className={`whitespace-nowrap px-4 py-1 transition-colors ${
-                  activeCategory === category.id
-                    ? 'border-b-yellow-600 text-yellow-500 border-b-2'
-                    : 'border-b-gray-600 text-white hover:bg-yellow-700 hover:bg-opacity-30'
-                }`}
+                className={`
+    shrink-0           // Prevents flex item from shrinking (optional)
+    max-w-[200px]      // Constrains max width
+    whitespace-nowrap  
+    overflow-hidden    
+    text-ellipsis      
+    transition-colors  
+    ${activeCategory === category.id
+                  ? "border-b-yellow-600 text-yellow-500 border-b-2"
+                  : "border-b-stone-600 text-white hover:bg-yellow-700 hover:bg-opacity-30"
+                }
+  `}
               >
-                {category.name}
+                <img src={category.items.find(item =>
+                  item.itemSizes.some(size =>
+                    size.buttonImage && size.buttonImage['44x44x100.webp']
+                  )
+                )?.itemSizes.find(size =>
+                  size.buttonImage && size.buttonImage['44x44x100.webp']
+                )?.buttonImage['44x44x100.webp']} width={15} className={"rounded mr-2 mb-2"}/> {category.name}
               </button>
             ))}
           </div>
@@ -234,13 +250,13 @@ export default function MenuPage() {
               key={category.id}
               id={category.id}
               ref={el => categoryRefs.current[category.id] = el}
-              className="mb-16"
+              className="mb-4"
             >
-              <h2 className="text-3xl font-bold mb-6 text-yellow-500 border-b border-yellow-800 pb-2">
+              <h2 className="text-1xl font-bold mb-6 text-yellow-500 border-b border-yellow-800 pb-2">
                 {category.name}
               </h2>
 
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 {category.items.map(item => {
                   const price = item.itemSizes[0]?.prices[0]?.price || 0;
                   const image = item.itemSizes[0]?.buttonImage?.['254x196x100.webp'] ||
@@ -250,7 +266,7 @@ export default function MenuPage() {
                   return (
                     <div
                       key={item.itemId}
-                      className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-gray-700 cursor-pointer"
+                      className="bg-stone-900 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-stone-700 cursor-pointer shadow-stone-900 "
 
                     >
                       <div className="relative h-48" onClick={() => openItemModal(item)}>
@@ -267,7 +283,7 @@ export default function MenuPage() {
                         </div>
                       </div>
                       <div className="p-4">
-                        <p className="text-gray-300 line-clamp-2">{item.description}</p>
+                        <p className="text-stone-300 line-clamp-2">{item.description}</p>
                         <button
                           onClick={() => {
                             addToCart(item, quantity);
@@ -284,7 +300,7 @@ export default function MenuPage() {
           ))
         ) : (
           <div className="text-center py-12">
-            <p className="text-xl text-gray-400">No items found matching your search.</p>
+            <p className="text-xl text-stone-400">No items found matching your search.</p>
           </div>
         )}
       </main>
@@ -307,11 +323,11 @@ export default function MenuPage() {
       {/* Item Detail Modal */}
       {selectedItem && (
         <div className="fixed inset-0 z-30 bg-black bg-opacity-75 flex items-center justify-center p-4">
-          <div className="bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-stone-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="relative">
               <button
                 onClick={closeItemModal}
-                className="absolute top-4 right-4 z-10 bg-gray-900 rounded-full p-2 text-white hover:bg-gray-700"
+                className="absolute top-4 right-4 z-10 bg-stone-900 rounded-full p-2 text-white hover:bg-stone-700"
               >
                 <FiX size={24}/>
               </button>
@@ -335,22 +351,22 @@ export default function MenuPage() {
 
                   <div className="mb-6">
                     <h3 className="text-lg font-semibold mb-2">Description</h3>
-                    <p className="text-gray-300">{selectedItem.description}</p>
+                    <p className="text-stone-300">{selectedItem.description}</p>
                   </div>
 
                   <div className="flex items-center mb-6">
                     <button
                       onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                      className="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-l-lg"
+                      className="bg-stone-700 hover:bg-stone-600 text-white p-2 rounded-l-lg"
                     >
                       <FiMinus/>
                     </button>
-                    <span className="bg-gray-700 px-4 py-2 text-center">
+                    <span className="bg-stone-700 px-4 py-2 text-center">
                       {quantity}
                     </span>
                     <button
                       onClick={() => setQuantity(prev => prev + 1)}
-                      className="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-r-lg"
+                      className="bg-stone-700 hover:bg-stone-600 text-white p-2 rounded-r-lg"
                     >
                       <FiPlus/>
                     </button>
@@ -378,13 +394,13 @@ export default function MenuPage() {
              }}
         >
           <div
-            className="absolute bottom-0 left-0 right-0 bg-gray-800 border-t border-yellow-600 rounded-t-2xl shadow-xl">
+            className="absolute bottom-0 left-0 right-0 bg-stone-800 border-t border-yellow-600 rounded-t-2xl shadow-xl">
             <div className="container mx-auto p-4">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-yellow-500">Your Order</h3>
                 <button
                   onClick={() => setShowCart(false)}
-                  className="text-gray-400 hover:text-white p-2"
+                  className="text-stone-400 hover:text-white p-2"
                 >
                   <FiX size={24}/>
                 </button>
@@ -392,26 +408,33 @@ export default function MenuPage() {
 
               <div className="max-h-[50vh] overflow-y-auto mb-4">
                 {cart.length === 0 ? (
-                  <p className="text-gray-400 text-center py-4">Your cart is empty</p>
+                  <p className="text-stone-400 text-center py-4">Your cart is empty</p>
                 ) : (
                   cart.map((item, index) => (
                     <div key={`${item.itemId}-${index}`}
-                         className="flex justify-between items-center py-3 border-b border-gray-700">
+                         className="flex justify-between items-center py-3 border-b border-stone-700">
                       <div className="flex-1">
-                        <p className="text-yellow-400 font-medium">{item.name}</p>
-                        <p className="text-sm text-gray-400">{item.price} ₾ × {item.quantity}</p>
+                        <p className="text-yellow-400 font-medium">
+                          <img
+                            src={item.itemSizes[0]?.buttonImage?.['44x44x100.webp'] ||
+                              item.itemSizes[0]?.buttonImage?.src ||
+                              '/placeholder-food.jpg'}
+                            alt={item.name}
+                            className="inline-block w-8 h-8 mr-2 rounded"/>
+                          {item.name}</p>
+                        <p className="text-sm text-stone-400">{item.price} ₾ × {item.quantity}</p>
                       </div>
                       <div className="flex items-center ml-4">
                         <button
                           onClick={() => updateCartItem(index, item.quantity - 1)}
-                          className="text-gray-400 hover:text-yellow-500 p-1"
+                          className="text-stone-400 hover:text-yellow-500 p-1"
                         >
                           <FiMinus size={16}/>
                         </button>
                         <span className="mx-2 w-6 text-center">{item.quantity}</span>
                         <button
                           onClick={() => updateCartItem(index, item.quantity + 1)}
-                          className="text-gray-400 hover:text-yellow-500 p-1"
+                          className="text-stone-400 hover:text-yellow-500 p-1"
                         >
                           <FiPlus size={16}/>
                         </button>
