@@ -1,34 +1,15 @@
-import React from 'react';
-import { translations } from '../data/translations';
-import styles from './CategoryNav.module.css';
-
-function CategoryNav({ categories, activeCategory, setActiveCategory, section, language }) {
+export default function CategoryNav({categories, lang, activeCat, refs}) {
   return (
-    <div className={`flex overflow-x-auto whitespace-nowrap py-3 sticky top-0 bg-gray-900 z-10 ${styles.hideScrollbar}`}>
-      {categories.map((category) => (
+    <nav className="sticky top-0 z-10 bg-gray-900 flex overflow-x-auto px-2 py-3 space-x-2">
+      {categories.map((cat) => (
         <button
-          key={category}
-          className={`px-3 py-2 mx-1 text-sm md:text-lg font-medium transition-colors duration-300 transform hover:scale-105 ${
-            activeCategory === category
-              ? 'border-b-2 border-yellow-400 text-yellow-400'
-              : 'text-gray-300 hover:text-yellow-400'
-          }`}
-          onClick={() => {
-            setActiveCategory(category);
-            const element = document.getElementById(`${section}-${category}`);
-            if (element) {
-              window.scrollTo({
-                top: element.offsetTop - 100,
-                behavior: 'smooth',
-              });
-            }
-          }}
+          key={cat.id}
+          onClick={() => refs.current[cat.id]?.scrollIntoView({behavior: "smooth"})}
+          className={`px-4 py-2 rounded-lg whitespace-nowrap ${activeCat === cat.id ? "bg-yellow-500 text-black" : "bg-gray-700"}`}
         >
-          {translations[language][category]}
+          {cat.title[lang]}
         </button>
       ))}
-    </div>
+    </nav>
   );
 }
-
-export default CategoryNav;
