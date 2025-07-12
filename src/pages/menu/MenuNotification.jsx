@@ -10,21 +10,21 @@ dayjs.extend(customParseFormat)
 
 const events = [
   {
-    date: '2024-07-19',
+    date: '2025-07-19',
     title: 'DJ Smash',
     promo: 'queen',
     avatar: 'https://prestastorage90158-staging.s3.eu-central-1.amazonaws.com/images/teatro/1750169857965_smash.jpg',
     link: 'https://teatro.ge/event/dj-smash',
   },
   {
-    date: '2024-08-02',
+    date: '2025-08-02',
     title: 'Morandi',
     promo: 'angels',
     avatar: 'https://prestastorage90158-staging.s3.eu-central-1.amazonaws.com/images/teatro/1750170198059_morandi.jpg',
     link: 'https://teatro.ge/event/morandi',
   },
   {
-    date: '2024-08-23',
+    date: '2025-08-23',
     title: 'Misha Miller',
     promo: 'teatro50',
     avatar: 'https://prestastorage90158-staging.s3.eu-central-1.amazonaws.com/images/teatro/1750170774799_misha.jpg',
@@ -92,12 +92,12 @@ export default function MenuNotification() {
       <img
         src={eventToShow.avatar}
         alt={eventToShow.title}
-        className="w-14 h-14 rounded-full object-cover object-top"
+        className="w-16 h-16 rounded-full object-cover object-top"
       />
       <div className="flex-1">
-        <h2 className={"font-bold"}>Teatro - presents</h2>
+        <h2>Teatro - presents</h2>
         <p className="text-sm font-medium">
-          Saturday, {dayjs(eventToShow.date).format('DD MMMM, YYYY')} – <strong>{eventToShow.title}</strong>
+          {dayjs(eventToShow.date).format('dddd, DD MMMM, YYYY')} – <strong>{eventToShow.title}</strong>
         </p>
         {eventToShow.promo && (
           <p className="text-sm">
