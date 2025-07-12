@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
 import {FiMinus, FiPlus, FiShoppingCart, FiX} from 'react-icons/fi';
 import Logo from "../../components/Logo";
-import Image from "next/image";
+import ImageV2 from "./ImageV2";
 
 export default function MenuPage() {
   const [categories, setCategories] = useState([]);
@@ -262,7 +262,7 @@ export default function MenuPage() {
                   const price = item.itemSizes[0]?.prices[0]?.price || 0;
                   const image = item.itemSizes[0]?.buttonImage?.['254x196x100.webp'] ||
                     item.itemSizes[0]?.buttonImage?.src ||
-                    'https://placehold.co/600x400/333333/FFF/?text=no%20image';
+                    'https://placehold.co/600x400/333333/FFF/PNG?text=no%20image';
                   const inCart = cart.find(s => s.itemId === item.itemId)?.quantity
                   return (
                     <div
@@ -271,10 +271,15 @@ export default function MenuPage() {
 
                     >
                       <div className="relative h-62" onClick={() => openItemModal(item)}>
-                        <img
+                        <ImageV2
                           src={image}
                           alt={item.name}
                           className="w-full h-full object-cover"
+                          loading={"lazy"}
+                          height={700}
+                          width={700}
+                          placeholder={"blur"}
+                          blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
                         />
                         <div
                           className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
@@ -334,17 +339,17 @@ export default function MenuPage() {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="h-64 lg:h-full">
-                  <Image
+                  <ImageV2
                     width={600}
                     height={768}
                     loading={"eager"}
                     placeholder={"blur"}
                     src={selectedItem.itemSizes[0]?.buttonImage?.['508x392x100.webp'] ||
                       selectedItem.itemSizes[0]?.buttonImage?.src ||
-                      'https://placehold.co/600x400/333333/FFF/?text=no%20image'}
+                      'https://placehold.co/600x400/333333/FFF/PNG/?text=no%20image'}
                     blurDataURL={`/_next/image?url=${selectedItem.itemSizes[0]?.buttonImage?.['508x392x100.webp'] ||
                     selectedItem.itemSizes[0]?.buttonImage?.src ||
-                    'https://placehold.co/600x400/333333/FFF/?text=no%20image'}&w=16&q=1`}
+                    'https://placehold.co/600x400/333333/FFF/PNG/?text=no%20image'}&w=16&q=1`}
                     alt={selectedItem.name}
                     className="w-full h-full object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none"
                   />
@@ -422,12 +427,12 @@ export default function MenuPage() {
                          className="flex justify-between items-center py-3 border-b border-stone-700">
                       <div className="flex-1">
                         <p className="text-yellow-400 font-medium">
-                          <Image
+                          <ImageV2
                             width={96}
                             height={96}
                             src={item.itemSizes[0]?.buttonImage?.['44x44x100.webp'] ||
                               item.itemSizes[0]?.buttonImage?.src ||
-                              'https://placehold.co/600x400/333333/FFF/?text=no%20image'}
+                              'https://placehold.co/600x400/333333/FFF/PNG/?text=no%20image'}
                             alt={item.name}
                             className="inline-block w-8 h-8 mr-2 rounded"/>
                           {item.name}</p>
