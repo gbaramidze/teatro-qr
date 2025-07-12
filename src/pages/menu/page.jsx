@@ -271,14 +271,10 @@ export default function MenuPage() {
 
                     >
                       <div className="relative h-62" onClick={() => openItemModal(item)}>
-                        <Image
-                          fill
+                        <img
                           src={image}
                           alt={item.name}
                           className="w-full h-full object-cover"
-                          loading="lazy"
-                          placeholder={"blur"}
-                          blurDataURL={`/_next/image?url=${image}&w=16&q=30`}
                         />
                         <div
                           className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
