@@ -4,6 +4,7 @@ import Head from 'next/head';
 import {FiMinus, FiPlus, FiShoppingCart, FiX} from 'react-icons/fi';
 import Logo from "../../components/Logo";
 import ImageV2 from "./ImageV2";
+import MenuNotification from "./MenuNotification";
 
 export default function MenuPage() {
   const [categories, setCategories] = useState([]);
@@ -188,7 +189,7 @@ export default function MenuPage() {
         <title>Teatro Nightclub Menu</title>
         <meta name="description" content="Explore our exquisite nightclub menu"/>
       </Head>
-
+      <MenuNotification/>
       {/* Sticky Navigation */}
       <div className={"bg-stone-900 p-2"}>
         <Logo/>
