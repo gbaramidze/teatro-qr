@@ -99,12 +99,6 @@ export default function MenuNotification() {
         <p className="text-sm font-medium">
           {dayjs(eventToShow.date).format('dddd, DD MMMM, YYYY')} – <strong>{eventToShow.title}</strong>
         </p>
-        {eventToShow.promo && (
-          <p className="text-sm">
-            Promo code:{' '}
-            <code className="bg-gray-700 px-2 py-0.5 rounded">{eventToShow.promo}</code>
-          </p>
-        )}
         <Link
           href={eventToShow.link}
           target="_blank"
