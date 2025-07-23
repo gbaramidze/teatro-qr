@@ -271,7 +271,7 @@ export default function MenuPage() {
         <div
           ref={navRef}
           onScroll={handleNavScroll}
-          className="flex overflow-x-auto space-x-4 py-3 px-4 scrollbar-hide hideScrollbar relative items-center"
+          className="flex overflow-x-auto space-x-1 py-3 px-4 scrollbar-hide hideScrollbar relative items-center"
         >
           {/* Левая тень */}
           {navScrollLeft > 0 && (
