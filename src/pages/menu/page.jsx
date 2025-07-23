@@ -5,6 +5,7 @@ import {FiMinus, FiPlus, FiShoppingCart, FiX} from 'react-icons/fi';
 import Logo from "../../components/Logo";
 import ImageV2 from "./ImageV2";
 import MenuNotification from "./MenuNotification";
+import {MenuIcon, XIcon} from "lucide-react";
 
 export default function MenuPage() {
   const [categories, setCategories] = useState([]);
@@ -18,6 +19,7 @@ export default function MenuPage() {
   const categoryRefs = useRef({});
   const navRef = useRef(null);
   const observerRef = useRef(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Fetch menu data
   useEffect(() => {
@@ -194,56 +196,110 @@ export default function MenuPage() {
       <div className={"bg-stone-900 p-2"}>
         <Logo/>
       </div>
-
-      <nav className="sticky top-0 z-20 bg-stone-900 shadow-lg border-b border-stone-600 shadow-black">
-        <div className="container mx-auto px-4">
-
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 transition-opacity duration-300 bg-black/60"
+          onClick={() => setSidebarOpen(false)}
+        >
+          {/* Sidebar */}
           <div
-            ref={navRef}
-            onScroll={handleNavScroll}
-            className="flex overflow-x-auto space-x-4 py-3 scrollbar-hide relative hideScrollbar"
+            className={`
+        fixed top-0 left-0 h-full w-64 bg-stone-900 p-4 z-50 overflow-y-auto
+        transform transition-transform duration-300
+        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+      `}
+            onClick={(e) => e.stopPropagation()} // чтобы не закрывался при клике внутри
           >
-            {/* Left shadow for scroll indication */}
-            {navScrollLeft > 0 && (
-              <div
-                className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-stone-800 to-transparent z-10 pointer-events-none"/>
-            )}
+            <button onClick={() => setSidebarOpen(false)} className="text-white mb-4">
+              <XIcon className="w-5 h-5"/>
+            </button>
 
-            {/* Right shadow for scroll indication */}
-            <div
-              className="absolute right-0 top-0 bottom-0 w-8  from-stone-800 to-transparent z-10 pointer-events-none"/>
-
-            {categories.map(category => (
-              <button
-                key={category.id}
-                data-category-id={category.id}
-                onClick={() => scrollToCategory(category.id)}
-                className={`
-    shrink-0           // Prevents flex item from shrinking (optional)
-    max-w-[200px]      // Constrains max width
-    whitespace-nowrap  
-    overflow-hidden    
-    text-ellipsis      
-    transition-colors  
-    ${activeCategory === category.id
-                  ? "border-b-yellow-600 text-yellow-500 border-b-2"
-                  : "border-b-stone-600 text-white"
-                }
-  `}
-              >
-                <img src={category.items.find(item =>
-                  item.itemSizes.some(size =>
-                    size.buttonImage && size.buttonImage['44x44x100.webp']
+            <nav className="flex flex-col space-y-2">
+              {categories.map((category) => {
+                const image = category.items
+                  .find((item) =>
+                    item.itemSizes.some(
+                      (size) =>
+                        size.buttonImage && size.buttonImage["44x44x100.webp"]
+                    )
                   )
-                )?.itemSizes.find(size =>
-                  size.buttonImage && size.buttonImage['44x44x100.webp']
-                )?.buttonImage['44x44x100.webp']} width={15} className={"rounded mr-2 mb-2"}/> {category.name}
-              </button>
-            ))}
+                  ?.itemSizes.find(
+                    (size) =>
+                      size.buttonImage && size.buttonImage["44x44x100.webp"]
+                  )?.buttonImage["44x44x100.webp"];
+
+                return (
+                  <button
+                    key={category.id}
+                    onClick={() => {
+                      scrollToCategory(category.id);
+                      setSidebarOpen(false);
+                    }}
+                    className={`text-left px-3 py-2 rounded transition-colors flex gap-2 items-center 
+                ${
+                      activeCategory === category.id
+                        ? "bg-yellow-500 text-black"
+                        : "text-white hover:bg-stone-700"
+                    }`}
+                  >
+                    {image && (
+                      <img
+                        src={image}
+                        width={30}
+                        height={30}
+                        className="rounded-full mb-1"
+                        alt=""
+                      />
+                    )}
+                    {category.name.split("(")[0].trim()}
+                  </button>
+                );
+              })}
+            </nav>
           </div>
         </div>
-      </nav>
+      )}
 
+
+      <nav className="sticky top-0 z-30 bg-stone-900 border-b border-stone-600 shadow-lg shadow-black flex">
+        <div className="flex items-center justify-between py-2 px-4">
+          <button onClick={() => setSidebarOpen(true)} className="text-white">
+            <MenuIcon className="w-6 h-6"/>
+          </button>
+        </div>
+
+        <div
+          ref={navRef}
+          onScroll={handleNavScroll}
+          className="flex overflow-x-auto space-x-4 py-3 px-4 scrollbar-hide hideScrollbar relative items-center"
+        >
+          {/* Левая тень */}
+          {navScrollLeft > 0 && (
+            <div
+              className="absolute left-0 top-0 bottom-0 pointer-events-none"/>
+          )}
+
+          {/* Кнопки категорий */}
+          {categories.map(category => (
+            <button
+              key={category.id}
+              data-category-id={category.id}
+              onClick={() => scrollToCategory(category.id)}
+              className={`shrink-0 max-w-[200px] px-3 py-1 rounded-full text-sm text-ellipsis whitespace-nowrap overflow-hidden transition-colors
+        ${activeCategory === category.id
+                ? "bg-yellow-500 text-black"
+                : "bg-transparent text-white hover:bg-stone-700"}
+      `}
+            >
+              {category.name.split('(')[0].trim()}
+            </button>
+          ))}
+
+          {/* Правая тень */}
+          <div
+            className="absolute right-0 top-0 bottom-0 from-stone-800 to-transparent z-10 pointer-events-none"/>
+        </div>
+      </nav>
       {/* Menu Content */}
       <main className="container mx-auto px-2 py-8">
         {filteredCategories.length > 0 ? (
