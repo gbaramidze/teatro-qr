@@ -24,11 +24,32 @@ const events = [
     link: 'https://teatro.ge/event/morandi',
   },
   {
+    date: '2025-08-09',
+    title: 'DJ Nejtrino',
+    promo: 'angels',
+    avatar: 'https://teatro.ge/_next/image/?url=https%3A%2F%2Fprestastorage90158-staging.s3.eu-central-1.amazonaws.com%2Fimages%2Fteatro%2F1753998090941_8399341.jpg&w=640&q=90',
+    link: 'https://teatro.ge/event/dj-nejtrino',
+  },
+  {
+    date: '2025-08-16',
+    title: 'Gunwest',
+    promo: 'angels',
+    avatar: 'https://teatro.ge/_next/image/?url=https%3A%2F%2Fprestastorage90158-staging.s3.eu-central-1.amazonaws.com%2Fimages%2Fteatro%2F1754244998226_poster.jpg&w=640&q=90',
+    link: 'https://teatro.ge/event/gunwest',
+  },
+  {
     date: '2025-08-23',
     title: 'Misha Miller',
     promo: 'teatro50',
     avatar: 'https://prestastorage90158-staging.s3.eu-central-1.amazonaws.com/images/teatro/1750170774799_misha.jpg',
     link: 'https://teatro.ge/event/misha-miller',
+  },
+  {
+    date: '2025-09-05',
+    title: 'Burak Yeter',
+    promo: 'angels',
+    avatar: 'https://teatro.ge/_next/image/?url=https%3A%2F%2Fprestastorage90158-staging.s3.eu-central-1.amazonaws.com%2Fimages%2Fteatro%2F1753998564147_1.jpg&w=640&q=90',
+    link: 'https://teatro.ge/event/burak-yeter',
   },
 ]
 
