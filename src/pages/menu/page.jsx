@@ -323,7 +323,7 @@ export default function MenuPage() {
                   return (
                     <div
                       key={item.itemId}
-                      className="bg-stone-950/30 flex flex-col justify-between rounded overflow-hidden cursor-pointer shadow-stone-900"
+                      className="bg-stone-950/30 flex flex-col rounded overflow-hidden cursor-pointer shadow-stone-900"
 
                     >
                       <div className="relative" onClick={() => openItemModal(item)}>
@@ -339,7 +339,7 @@ export default function MenuPage() {
                           quality={100}
                         />
                       </div>
-                      <div className="px-2">
+                      <div className="px-2 flex-1">
                         <h3
                           className="text-sm font-bold line-clamp-2 text-yellow-500 mt-1">{item.name}</h3>
                         <p className="text-stone-300 text-sm line-clamp-2">{item.description}</p>
