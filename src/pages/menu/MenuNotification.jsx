@@ -51,6 +51,13 @@ const events = [
     avatar: 'https://teatro.ge/_next/image/?url=https%3A%2F%2Fprestastorage90158-staging.s3.eu-central-1.amazonaws.com%2Fimages%2Fteatro%2F1753998564147_1.jpg&w=640&q=90',
     link: 'https://teatro.ge/event/burak-yeter',
   },
+  {
+    date: '2025-09-20',
+    title: 'Ellai',
+    promo: 'angels',
+    avatar: 'https://teatro.ge/_next/image/?url=https%3A%2F%2Fprestastorage90158-staging.s3.eu-central-1.amazonaws.com%2Fimages%2Fteatro%2F1757574558558_poster2.jpg&w=640&q=75',
+    link: 'https://teatro.ge/event/ellai',
+  },
 ]
 
 function parseLocalDate(dateStr, add = 0) {
@@ -68,7 +75,7 @@ function formatDate(dateStr) {
 }
 
 export default function MenuNotification() {
-  const [eventToShow, setEventToShow] = useState(events[0])
+  const [eventToShow, setEventToShow] = useState()
   const [closed, setClosed] = useState(false)
   const [isClient, setIsClient] = useState(false)
 
