@@ -301,20 +301,19 @@ export default function MenuPage() {
         </div>
       </nav>
       {/* Menu Content */}
-      <main className="container mx-auto px-2 py-8">
+      <main className="container mx-auto px-2 py-3">
         {filteredCategories.length > 0 ? (
           filteredCategories.map(category => (
             <section
               key={category.id}
               id={category.id}
               ref={el => categoryRefs.current[category.id] = el}
-              className="mb-4"
             >
-              <h2 className="text-1xl font-bold mb-6 text-yellow-500 border-b border-yellow-800 pb-2">
+              <h2 className="text-1xl font-bold mb-2 text-yellow-500">
                 {category.name}
               </h2>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
                 {category.items.map(item => {
                   const price = item.itemSizes[0]?.prices[0]?.price || 0;
                   const image = item.itemSizes[0]?.buttonImage?.['254x196x100.webp'] ||
@@ -324,33 +323,33 @@ export default function MenuPage() {
                   return (
                     <div
                       key={item.itemId}
-                      className="bg-stone-900 flex flex-col justify-between rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-stone-700 cursor-pointer shadow-stone-900 "
+                      className="bg-stone-950/30 flex flex-col justify-between rounded overflow-hidden cursor-pointer shadow-stone-900"
 
                     >
-                      <div className="relative h-62" onClick={() => openItemModal(item)}>
+                      <div className="relative" onClick={() => openItemModal(item)}>
                         <ImageV2
                           src={image}
                           alt={item.name}
-                          className="w-full h-full object-cover"
+                          className="w-full object-cover"
                           loading={"lazy"}
-                          height={700}
-                          width={700}
+                          height={392}
+                          width={500}
                           placeholder={"blur"}
                           blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
+                          quality={100}
                         />
-                        <div
-                          className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                          <h3
-                            className="text-lg font-bold line-clamp-2">{item.name}</h3>
-                        </div>
+                      </div>
+                      <div className="px-2">
+                        <h3
+                          className="text-sm font-bold line-clamp-2 text-yellow-500 mt-1">{item.name}</h3>
+                        <p className="text-stone-300 text-sm line-clamp-2">{item.description}</p>
                       </div>
                       <div className="p-2">
-                        <p className="text-stone-300 line-clamp-2">{item.description}</p>
                         <button
                           onClick={() => {
                             addToCart(item, quantity);
                           }}
-                          className="mt-2 w-full bg-yellow-600 shadow-md shadow-stone-800 text-white py-1 px-4 rounded-3xl transition-colors">
+                          className="w-full bg-yellow-400 text-gray-800 shadow-md shadow-stone-800 text-xl py-0 px-2 rounded transition-colors font-500">
                           {inCart ? `${inCart} x - ` : ''} {price} ₾
                         </button>
                       </div>
@@ -395,24 +394,24 @@ export default function MenuPage() {
               </button>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="h-64 lg:h-full">
+                <div className="lg:h-full">
                   <ImageV2
-                    width={600}
-                    height={768}
+                    width={752}
+                    height={552}
                     loading={"eager"}
                     placeholder={"blur"}
-                    src={selectedItem.itemSizes[0]?.buttonImage?.['508x392x100.webp'] ||
+                    src={selectedItem.itemSizes[0]?.buttonImage?.['752x552x100.webp'] ||
                       selectedItem.itemSizes[0]?.buttonImage?.src ||
                       'https://placehold.co/600x400/333333/FFF/PNG/?text=no%20image'}
-                    blurDataURL={`/_next/image?url=${selectedItem.itemSizes[0]?.buttonImage?.['508x392x100.webp'] ||
+                    blurDataURL={`/_next/image?url=${selectedItem.itemSizes[0]?.buttonImage?.['752x552x100.webp'] ||
                     selectedItem.itemSizes[0]?.buttonImage?.src ||
                     'https://placehold.co/600x400/333333/FFF/PNG/?text=no%20image'}&w=16&q=1`}
                     alt={selectedItem.name}
-                    className="w-full h-full object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none"
+                    className="object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none"
                   />
                 </div>
 
-                <div className="p-6">
+                <div className="p-2">
                   <h2 className="text-2xl font-bold text-yellow-500 mb-2">{selectedItem.name}</h2>
                   <p className="text-xl text-yellow-400 mb-4">
                     {selectedItem.itemSizes[0]?.prices[0]?.price || 0} ₾
