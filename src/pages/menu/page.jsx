@@ -384,9 +384,9 @@ export default function MenuPage() {
       {/* Item Detail Modal */}
       {selectedItem && (
         <div
-          className="fixed inset-0 z-30 bg-black bg-opacity-75 flex items-center justify-center bottom-0 animate-fade-up animate-once animate-duration-400 animate-ease-in-out">
+          className="fixed bottom-0 inset-0 z-30 bg-black/60 bg-opacity-75 flex items-end animate-fade-up animate-once animate-duration-400 animate-ease-in-out justify-end">
           <div
-            className="bg-stone-800 max-w-4xl w-full h-full lg:h-80 overflow-y-auto hideScrollbar ">
+            className="bg-stone-800 ">
             <div className="relative">
               <button
                 onClick={closeItemModal}
@@ -395,7 +395,7 @@ export default function MenuPage() {
                 <FiX size={24}/>
               </button>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
                 <div className="lg:h-full">
                   <ImageV2
                     width={752}
@@ -419,12 +419,11 @@ export default function MenuPage() {
                     {selectedItem.itemSizes[0]?.prices[0]?.price || 0} ₾
                   </p>
 
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold mb-2">Description</h3>
+                  <div className="mb-2">
                     <p className="text-stone-300">{selectedItem.description}</p>
                   </div>
 
-                  <div className="flex items-center mb-6">
+                  <div className="flex items-center mb-3">
                     <button
                       onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                       className="bg-stone-700 text-white p-2 rounded-l-lg"
@@ -444,7 +443,7 @@ export default function MenuPage() {
 
                   <button
                     onClick={() => addToCart(selectedItem, quantity)}
-                    className="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-3 px-4 rounded-lg font-bold transition-colors flex items-center justify-center"
+                    className="w-full bg-yellow-400 hover:bg-yellow-400 text-black py-3 px-4 rounded-lg font-bold transition-colors flex items-center justify-center"
                   >
                     <FiShoppingCart className="mr-2"/>
                     Add {quantity} to Order - {(selectedItem.itemSizes[0]?.prices[0]?.price || 0) * quantity} ₾
