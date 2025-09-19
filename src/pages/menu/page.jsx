@@ -369,7 +369,7 @@ export default function MenuPage() {
       {/* Floating Cart Button */}
       {totalItems > 0 && (
         <div
-          className={`fixed bottom-4 right-4 z-20 transition-all duration-300 ${showCart ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+          className={`fixed bottom-4 right-4 z-20 transition-all duration-300 ${showCart ? 'opacity-0 pointer-events-none' : 'opacity-100'} animate-fade-left animate-once animate-duration-300 animate-ease-linear`}
         >
           <button
             onClick={() => setShowCart(true)}
@@ -383,8 +383,10 @@ export default function MenuPage() {
 
       {/* Item Detail Modal */}
       {selectedItem && (
-        <div className="fixed inset-0 z-30 bg-black bg-opacity-75 flex items-center justify-center p-4">
-          <div className="bg-stone-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto hideScrollbar">
+        <div
+          className="fixed inset-0 z-30 bg-black bg-opacity-75 flex items-center justify-center bottom-0 animate-fade-up animate-once animate-duration-400 animate-ease-in-out">
+          <div
+            className="bg-stone-800 max-w-4xl w-full h-full lg:h-80 overflow-y-auto hideScrollbar ">
             <div className="relative">
               <button
                 onClick={closeItemModal}
@@ -407,7 +409,7 @@ export default function MenuPage() {
                     selectedItem.itemSizes[0]?.buttonImage?.src ||
                     'https://placehold.co/600x400/333333/FFF/PNG/?text=no%20image'}&w=16&q=1`}
                     alt={selectedItem.name}
-                    className="object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none"
+                    className="object-cover lg:rounded-l-lg lg:rounded-tr-none"
                   />
                 </div>
 
@@ -429,7 +431,7 @@ export default function MenuPage() {
                     >
                       <FiMinus/>
                     </button>
-                    <span className="bg-stone-700 px-4 py-2 text-center">
+                    <span className="bg-stone-700/80 px-4 py-1 text-center">
                       {quantity}
                     </span>
                     <button
@@ -462,7 +464,7 @@ export default function MenuPage() {
              }}
         >
           <div
-            className="absolute bottom-0 left-0 right-0 bg-stone-800 border-t border-yellow-600 rounded-t-2xl shadow-xl">
+            className="absolute bottom-0 left-0 right-0 bg-stone-800 border-t border-yellow-600 rounded-t-2xl shadow-xl animate-fade-up animate-once animate-duration-300 animate-ease-linear">
             <div className="container mx-auto p-4">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-yellow-500">Your Order</h3>
