@@ -12,7 +12,7 @@ export default function Document() {
         <meta name="theme-color" content="#1c1917"/>
 
       </Head>
-      <body className="bg-gray-900 text-white">
+      <body className="bg-white text-black">
       <Main/>
       <NextScript/>
       </body>

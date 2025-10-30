@@ -1,8 +1,9 @@
 // pages/menu.js
+"use client"
 import {useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
 import {FiMinus, FiPlus, FiShoppingCart, FiX} from 'react-icons/fi';
-import Logo from "../../components/Logo";
+import Logo from "../../../components/Logo";
 import ImageV2 from "./ImageV2";
 import MenuNotification from "./MenuNotification";
 import {MenuIcon, XIcon} from "lucide-react";

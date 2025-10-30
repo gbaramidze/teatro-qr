@@ -1,6 +1,6 @@
 import React from 'react';
-import MenuPage from "./menu/page";
-
+// import MenuPage from "./menu/page";
+import Menu2 from "./menu/menu2/menu2";
 // function App() {
 //   const [section, setSection] = React.useState(null);
 //   const [activeCategory, setActiveCategory] = React.useState(null);
@@ -118,4 +118,4 @@ import MenuPage from "./menu/page";
 // }
 
 
-export default MenuPage;
+export default Menu2;
