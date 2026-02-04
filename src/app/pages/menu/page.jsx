@@ -187,7 +187,7 @@ export default function MenuPage() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-stone-800 text-stone-100 relative pb-16">
+    <div className="min-h-screen bg-black text-stone-100 relative pb-16">
       <Head>
         <title>Teatro Nightclub Menu</title>
         <meta name="description" content="Explore our exquisite nightclub menu"/>
@@ -310,11 +310,11 @@ export default function MenuPage() {
               id={category.id}
               ref={el => categoryRefs.current[category.id] = el}
             >
-              <h2 className="text-1xl font-bold mb-2 text-yellow-500">
+              <h2 className="text-2xl font-bold mb-1 mt-3 text-yellow-500">
                 {category.name}
               </h2>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
+              <div className="grid grid-cols md:grid-cols-2 lg:grid-cols-4 gap-1">
                 {category.items.map(item => {
                   const price = item.itemSizes[0]?.prices[0]?.price || 0;
                   const image = item.itemSizes[0]?.buttonImage?.['254x196x100.webp'] ||
@@ -324,37 +324,80 @@ export default function MenuPage() {
                   return (
                     <div
                       key={item.itemId}
-                      className="bg-stone-950/30 flex flex-col rounded overflow-hidden cursor-pointer shadow-stone-900"
+                      className="
+    bg-stone-800
+    flex flex-row sm:flex-col
+    rounded overflow-hidden
+    cursor-pointer
+    shadow-stone-900
+            shadow-md
+    mt-2
 
+  "
                     >
-                      <div className="relative" onClick={() => openItemModal(item)}>
+                      {/* IMAGE */}
+
+
+                      {/* CONTENT */}
+                      <div className="pt-4 pl-4 pb-2 pr-1 flex flex-col justify-between flex-1  order-0 sm:order-2">
+                        <div>
+                          <h3 className="text-md font-bold line-clamp-2 text-yellow-500" style={{lineHeight: '18px'}}>
+                            {item.name}
+                          </h3>
+                          <p className="text-stone-300 text-sm line-clamp-2">
+                            {item.description}
+                          </p>
+                        </div>
+
+                        <button
+                          onClick={() => addToCart(item, quantity)}
+                          className="
+        mt-1
+        w-full
+        bg-yellow-400
+        text-gray-800
+        shadow-md shadow-stone-800
+        text-sm sm:text-xl
+        py-1 px-2
+        rounded
+        transition-colors
+        font-500
+        sm:block
+        hidden
+      "
+                        >
+                          {inCart ? `${inCart} × ` : ''}
+                          {price} ₾
+                        </button>
+                        <div className="mt-1
+        text-yellow-400
+        text-lg sm:text-xl
+        rounded
+        transition-colors
+        font-500
+        sm:hidden
+        block">
+                          {price} ₾
+                        </div>
+                      </div>
+                      <div
+                        className="relative w-28 h-28 sm:w-full sm:h-auto flex-shrink-0"
+                        onClick={() => openItemModal(item)}
+                      >
                         <ImageV2
                           src={image}
                           alt={item.name}
-                          className="w-full object-cover"
-                          loading={"lazy"}
+                          className="w-full h-full sm:h-auto object-cover"
+                          loading="lazy"
                           height={392}
                           width={500}
-                          placeholder={"blur"}
+                          placeholder="blur"
                           blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
                           quality={100}
                         />
                       </div>
-                      <div className="px-2 flex-1">
-                        <h3
-                          className="text-sm font-bold line-clamp-2 text-yellow-500 mt-1">{item.name}</h3>
-                        <p className="text-stone-300 text-sm line-clamp-2">{item.description}</p>
-                      </div>
-                      <div className="p-2">
-                        <button
-                          onClick={() => {
-                            addToCart(item, quantity);
-                          }}
-                          className="w-full bg-yellow-400 text-gray-800 shadow-md shadow-stone-800 text-xl py-0 px-2 rounded transition-colors font-500">
-                          {inCart ? `${inCart} x - ` : ''} {price} ₾
-                        </button>
-                      </div>
                     </div>
+
                   );
                 })}
               </div>
