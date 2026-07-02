@@ -26,7 +26,7 @@ export default function MenuPage() {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await fetch('https://teatro.eat-me.online/api/v1/menu');
+        const response = await fetch('https://api.restiq.ge/functions/v1/qr-menu?tenant_id=e8c9f3ef-cfc6-4bef-9100-f1ba46edf920');
         const data = await response.json();
         const fetchedCategories = data.result.itemCategories
           .filter(cat => !cat.isHidden)

@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '*.syrve.com',
+        hostname: '*.restiq.ge',
         pathname: '/**',
       },
       {
